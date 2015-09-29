@@ -1,9 +1,7 @@
 package com.xjj.util;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -16,7 +14,7 @@ public class RandomUtils {
 	//private static Random random;
 
 	//双重校验锁获取一个Random单例
-	public static Random getRandom() {
+	public static ThreadLocalRandom getRandom() {
 		return ThreadLocalRandom.current();
 		/*if(random==null){
 			synchronized (RandomUtils.class) {
@@ -35,7 +33,8 @@ public class RandomUtils {
 	 * @return
 	 */
 	public static int getRandomInt(int max) {
-		return Math.abs(getRandom().nextInt())%max;
+		//return Math.abs(getRandom().nextInt())%max;
+		return getRandom().nextInt(max);
 	}
 	
 	/**
@@ -44,7 +43,8 @@ public class RandomUtils {
 	 * @return
 	 */
 	public static long getRandomLong(long max) {
-		return Math.abs(getRandom().nextInt())%max;
+		//return Math.abs(getRandom().nextInt())%max;
+		return getRandom().nextLong(max);
 	}
 	
 	/**
@@ -131,13 +131,15 @@ public class RandomUtils {
 	}
 	
 	public static void main(String[] args) {
-		Set<String> set = new HashSet<>();
+		/*Set<String> set = new HashSet<>();
 		for (int i = 0; i < 12; i++) {
 			set.add("I am: " + i);	
 		}
 		
 		for (int i = 0; i < 10; i++) {
 			System.out.println(getRandomElement(set));
-		}
+		}*/
+		
+		System.out.println(getRandom().nextInt(-100, 10));
 	}
 }
