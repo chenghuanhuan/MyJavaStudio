@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>JS Template Engine test</title>
+	<script src="../resources/js/jquery-2.1.4.js"></script>
+	<script src="jsrender.min.js"></script>
+	<script src="baiduTemplate.js"></script>
+	<script src="template.js"></script>
+	<script src="juicer.js"></script>
+	<link href="../resources/css/common.css" rel="stylesheet" />
+
+	<style type="text/css">
+		progress {width:300px; background-color:#e6e6e6	;}
+		progress::-webkit-progress-bar { background: #e6e6e6; }
+		progress::-webkit-progress-value  { background: #0064B4; }
+	</style>
+
+</head>
+<body>
+	<h1>JS模板引擎测试对比</h1>
+	<input type="button" value="全部测试" onClick="testAll();">
+	<table id="testTable">
+		<!-- <tr>
+			<th>JsRender（铁道部）</th>
+			<td><input type="button" value="开始测试" onClick="jsRenderTest();"></td>
+			<td><progress id="jsRenderChart" max="100"></progress></td>
+			<td><span id="jsRenderResult"></span></td>
+		</tr> -->
+	</table>
+	<br/>
+	<div>
+		<div id="hint"></div>
+		<div>渲染结果：</div>
+		<div><pre id="result"></pre></div>
+	</div>
+</body>
+
+<script id="testTrTmpl" type="text/html">
+	{{each list as item i}}
+	<tr>
+		<th>{{i}}、{{item.name}}（{{item.mainUser}}）</th>
+		<!-- <td><input type="button" value="开始测试" onClick="{{item.name}}Test();"></td>  -->
+		<td><input type="button" value="测试" onClick="testList.list[{{i}}].tester();"></td>
+		<td><progress id="{{item.name}}Chart" max="100"></progress></td>
+		<td><span id="{{item.name}}Result"></span></td>
+	</tr>
+	{{/each}}
+</script>
+
+<!-- 各种模板 -->
+<script id="jsRenderTmpl" type="text/x-jsrender">
+	第{{:index}}个，Name: {{:name}} &nbsp;&nbsp;Number: {{:number}}
+</script>
+
+<script id="baiduTemplateTmpl" type="text/html">
+	<%for(var i=0;i<list.length;i++){%>
+		第<%=list[i].index%>个，Name: <%=list[i].name%> &nbsp;&nbsp;Number: <%=list[i].number%>
+	<%}%>
+</script>
+
+<script id="artTemplateTmpl" type="text/html">
+	{{each list as item i}}
+		第{{item.index}}个，Name: {{item.name}} &nbsp;&nbsp;Number: {{item.number}}
+	{{/each}}
+</script>
+
+<script id="juicerTmpl" type="text/template">
+	{@each list as item}
+		第${item.index}个，Name: ${item.name} &nbsp;&nbsp;Number: ${item.number}
+	{@/each}
+</script>
+
+<script>
+	// 需要测试的模板引擎名字和测试函数
+	var testList ={
+		dataLength: 100, // 数据量
+		times: 10000, // 渲染次数
+		
+		// 引擎名称
+	  	// 主要用户
+	  	// 渲染函数
+		list:[
+			{	name: "jsRender",
+				mainUser: "铁道部",
+				render: function(){
+					var template = $.templates("#jsRenderTmpl");
+					var html = template.render(data.list);
+					$("#result").html(html);
+				},
+				tester: function(){
+					var startTime = new Date();
+					for(i=0;i<testList.times;i++){
+						this.render();
+					}
+					var costTime = new Date() - startTime;
+					$("#"+this.name+"Result").html(costTime + "ms");
+					$("#"+this.name+"Chart").val(costTime/factor);
+				} 
+			},
+			{	name: "baiduTemplate",
+				mainUser: "百度",
+				render: function(){
+					var html = baidu.template('baiduTemplateTmpl', data);  
+					$("#result").html(html);
+				},
+				tester: function(){
+					var startTime = new Date();
+					for(i=0;i<testList.times;i++){
+						this.render();
+					}
+					var costTime = new Date() - startTime;
+					$("#"+this.name+"Result").html(costTime + "ms");
+					$("#"+this.name+"Chart").val(costTime/factor);
+				}
+			},
+			{	name: "artTemplate",
+				mainUser: "腾讯",
+				render: function(){
+					var html = template('artTemplateTmpl', data);  
+					$("#result").html(html);
+				},
+				tester: function(){
+					var startTime = new Date();
+					for(i=0;i<testList.times;i++){
+						this.render();
+					}
+					var costTime = new Date() - startTime;
+					$("#"+this.name+"Result").html(costTime + "ms");
+					$("#"+this.name+"Chart").val(costTime/factor);
+				}
+			},
+			{	name: "juicer",
+				mainUser: "淘宝",
+				render: function(){
+					var tpl = document.getElementById('juicerTmpl').innerHTML;
+					var html = juicer(tpl, data);
+					$("#result").html(html);
+				},
+				tester: function(){
+					var startTime = new Date();
+					for(i=0;i<testList.times;i++){
+						this.render();
+					}
+					var costTime = new Date() - startTime;
+					$("#"+this.name+"Result").html(costTime + "ms");
+					$("#"+this.name+"Chart").val(costTime/factor);
+				}
+			}
+		]	
+	};
+	
+	//图形调整系数
+	var factor = testList.times/80;
+	
+	var data = {
+		title: "测试数据",
+	    list: []
+	};
+	
+	//初始化测试数据
+	for (var i = 0; i < testList.dataLength; i ++) {
+	    data.list.push({
+	        index: i,
+	        name: '<strong style="color:red">张三</strong>',
+	        number: 100+i
+	    }); 
+	};
+	
+	$(function(){
+			var html = template('testTrTmpl', testList);  
+			$("#testTable").html(html);
+	});
+	
+	function testAll(){
+		for(var i = 0; i < testList.dataLength; i ++){
+			testList.list[i].tester();
+		}
+	}
+	
+</script>
+
+
+</html>
