@@ -28,6 +28,8 @@
 	<mvc:resources location="/" mapping="/**/*.png"/>
 	<mvc:resources location="/" mapping="/**/*.gif"/>
 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+
 	<bean id="controllerMethodInterceptor" class="com.xjj.web.interceptor.ControllerMethodInterceptor"/>
 	
 	<!-- 方法拦截器（拦截Controller包中的所有被RequestMapping注解的方法） MethodInterceptor -->

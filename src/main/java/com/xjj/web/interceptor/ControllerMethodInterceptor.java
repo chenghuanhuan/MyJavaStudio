@@ -30,7 +30,7 @@ public class ControllerMethodInterceptor implements MethodInterceptor {
 		
 		logger.info("Before: interceptor name: {}", invocation.getMethod().getName());
 		
-		logger.info("Arguments: {}", jsonMapper.writeValueAsString(invocation.getArguments()));
+		//logger.info("Arguments: {}", jsonMapper.writeValueAsString(invocation.getArguments()));
 		
 		Object result = invocation.proceed();
 		
