@@ -16,7 +16,7 @@ public class Singer {
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//@Scheduled(fixedDelay=1000)  //第一种方式 ，fixedDelay延时多少毫秒，多少毫秒执行一次  
-	@Scheduled(cron="0 * * * * *")     //第二种方式  
+	//@Scheduled(cron="0 * * * * *")     //第二种方式  
   
     /* 
         1 Seconds (0-59) 
