@@ -2,6 +2,9 @@ package com.xjj.web.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -9,11 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.xjj.json.JsonResult;
 
@@ -22,7 +24,7 @@ import com.xjj.json.JsonResult;
  * @author XuJijun
  *
  */
-@Controller
+@RestController
 @RequestMapping("/servlet/file")
 public class FileUploadController {
 	
@@ -31,8 +33,17 @@ public class FileUploadController {
 	 */
 	 private static final String SAVE_DIR = "uploadFiles";
 	
+	 /**
+	  * 
+	  * @param request
+	  * @param response
+	  * @param p form表单中，type="text"的input控件，内容通过这个参数传送过来，以input控件中的name属性来区分
+	  * @return JSON表示的处理结果
+	  * @throws ServletException
+	  * @throws IOException
+	  */
 	@RequestMapping("/upload")
-	public @ResponseBody JsonResult upload(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> p)
+	public JsonResult upload(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> p)
 			throws ServletException, IOException {
 
 		// 获取 web application的绝对路径
@@ -44,17 +55,28 @@ public class FileUploadController {
 		// 如果文件存放路径不存在，则mkdir一个
 		File fileSaveDir = new File(savePath);
 		if (!fileSaveDir.exists()) {
-			fileSaveDir.mkdir();
+			fileSaveDir.mkdirs();
 		}
 
+		List<String> fileNames = new ArrayList<>();
+		
+		//循环所有的part，把part中的文件保存到硬盘中
 		for (Part part : request.getParts()) {
-			String fileName = extractFileName(part);
-			if(!StringUtils.isEmpty(fileName)){
+			String fileName = part.getSubmittedFileName();
+			
+			//form表单中的每个input，都在一个不同的part中，
+			//所以需要判断通过fileName是否为空，过滤掉其他类型的input（比如type="text"）：
+			if(!StringUtils.isEmpty(fileName)){ 
 				part.write(savePath + File.separator + fileName);
+				fileNames.add(fileName);
 			}
 		}
 
-		return new JsonResult("200", "文件上传成功！", savePath);
+		Map<String, Object> resultData = new HashMap<>();
+		resultData.put("savePath", savePath);
+		resultData.put("files", fileNames);
+		
+		return new JsonResult("200", "文件上传成功！", resultData);
 	}
 	 
 	/**
@@ -66,6 +88,7 @@ public class FileUploadController {
 	 * @param part
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private String extractFileName(Part part) {
 	    String contentDisp = part.getHeader("content-disposition");
 	    String[] items = contentDisp.split(";");
