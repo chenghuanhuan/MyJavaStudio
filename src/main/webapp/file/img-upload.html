@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link href="../resources/css/common.css" rel="stylesheet" />
-	<script src="../resources/js/jquery-2.1.4.js"></script>
+	<script src="../resources/js/jquery-1.11.3.js"></script>
 
 	<style type="text/css">
 		.addbtn img{width: 100px;}
@@ -72,7 +72,7 @@
 			});
 			
 			//把点击事件传递给file控件
-			fileControl.focus(); //注意：某些浏览器，比如低版本的IE，必须先focus file控件，不然无法弹出文件选择器！！！
+			fileControl.focus(); //注意：某些浏览器，比如Android4.2版本的Webview，必须先focus file控件，不然无法弹出文件选择器！！！
 			fileControl.click();
 			fileControl.hide();
 		});

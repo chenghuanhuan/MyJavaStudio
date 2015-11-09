@@ -43,6 +43,6 @@ And some customized utilities, encapsulated open-source code.
 - SpringMVC receive JSON data using Map. (refer to: http://blog.csdn.net/clementad/article/details/43955741)
 - Usage of JQuery plug-in: bigautocomplete (test-tool.html) 
 - Javascript Template Engine: webapp/jste
-- File upload: webapp/file/upload.html
-- Image upload: webapp/file/img-upload.html
+- File upload: webapp/file/upload.html (refer to: http://blog.csdn.net/clementad/article/details/49717397)
+- Image upload: webapp/file/img-upload.html (refer to: http://blog.csdn.net/clementad/article/details/49742981)
 
