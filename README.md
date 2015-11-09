@@ -44,4 +44,5 @@ And some customized utilities, encapsulated open-source code.
 - Usage of JQuery plug-in: bigautocomplete (test-tool.html) 
 - Javascript Template Engine: webapp/jste
 - File upload: webapp/file/upload.html
+- Image upload: webapp/file/img-upload.html
 
