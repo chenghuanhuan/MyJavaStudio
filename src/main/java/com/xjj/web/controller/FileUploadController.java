@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,7 +67,7 @@ public class FileUploadController {
 			
 			//form表单中的每个input，都在一个不同的part中，
 			//所以需要判断通过fileName是否为空，过滤掉其他类型的input（比如type="text"）：
-			if(!StringUtils.isEmpty(fileName)){ 
+			if(StringUtils.isNotBlank(fileName)){ 
 				part.write(savePath + File.separator + fileName);
 				fileNames.add(fileName);
 			}
