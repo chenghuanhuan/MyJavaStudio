@@ -50,7 +50,8 @@ public class FileUploadController {
 		String appPath = request.getServletContext().getRealPath("");
 		
 		// 构造文件存放的路径
-		String savePath = appPath + File.separator + SAVE_DIR;
+		//String savePath = appPath + File.separator + SAVE_DIR;
+		String savePath = appPath + SAVE_DIR;
 
 		// 如果文件存放路径不存在，则mkdir一个
 		File fileSaveDir = new File(savePath);
