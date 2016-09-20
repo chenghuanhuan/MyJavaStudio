@@ -28,22 +28,30 @@ public class RandomUtils {
 	}
 
 	/**
-	 * 获得一个[0,max)之间的整数。
+	 * 获得一个[0,max)之间的随机整数。
 	 * @param max
 	 * @return
 	 */
 	public static int getRandomInt(int max) {
-		//return Math.abs(getRandom().nextInt())%max;
 		return getRandom().nextInt(max);
 	}
 	
 	/**
-	 * 获得一个[0,max)之间的整数。
+	 * 获得一个[min, max]之间的随机整数
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+	public static int getRandomInt(int min, int max) {
+		return getRandom().nextInt(max-min+1) + min;
+	}
+
+	/**
+	 * 获得一个[0,max)之间的长整数。
 	 * @param max
 	 * @return
 	 */
 	public static long getRandomLong(long max) {
-		//return Math.abs(getRandom().nextInt())%max;
 		return getRandom().nextLong(max);
 	}
 	

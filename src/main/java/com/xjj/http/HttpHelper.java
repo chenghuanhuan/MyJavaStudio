@@ -12,6 +12,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xjj.util.RandomUtils;
 
 /**
  * 封装http请求的相关方法
@@ -31,8 +32,59 @@ public class HttpHelper {
 
 	public final static String[] userAgents = {"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36",
 		"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36 SE 2.X MetaSr 1.0",
-		"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36"};
+		"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36",
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36",
+		"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36 SE 2.X MetaSr 1.0"};
 
+	public final static String[] ipPrefixes = {"14.125.63.", "42.199.58.", "59.37.23.", "14.28.36.", "14.149.159.", "116.16.48.",
+			"219.129.99.", "223.73.60.", "116.27.32.", "125.92.119.", "123.133.53.", "113.92.146.", "180.99.62.", "183.51.159.",
+			"119.190.61.", "14.124.102.", "113.245.100."};
+	
+	/**
+	 * 使用随机的头信息发送GET请求
+	 * @param url
+	 * @return
+	 */
+	public static HttpResult doGetWithRandoms(String url){
+		HttpResult result = new HttpResult();
+		HttpClient client = HttpClientBuilder.create().build();
+		
+		try {
+			HttpGet request = new HttpGet(url);
+			request.setHeader("Accept", defaultHeaders.get("Accept"));
+			request.setHeader("Connection", defaultHeaders.get("Connection"));
+			request.setHeader("Accept-Language", defaultHeaders.get("Accept-Language"));
+			request.setHeader("User-Agent", userAgents[RandomUtils.getRandomInt(userAgents.length)]);
+			String ip = ipPrefixes[RandomUtils.getRandomInt(ipPrefixes.length)]+RandomUtils.getRandomInt(2,254);
+			request.setHeader("X-Forwarded-For", ip);
+			request.setHeader("CLIENT-IP", ip);
+			request.setHeader("HTTP-CLIENT-IP", ip);
+			request.setHeader("X-Real-IP", ip);
+			request.setHeader("Proxy-Client-IP", ip);
+			request.setHeader("WL-Proxy-Client-IP", ip);
+			request.setHeader("HTTP_X_FORWARDED_FOR", ip);
+			request.setHeader("Cache-Control", "max-age=0");
+			
+			System.out.println("User-Agent: " + request.getHeaders("User-Agent")[0].getValue());
+			System.out.println("ip: " + ip);
+			
+			HttpResponse response = client.execute(request);
+			HttpEntity entity = response.getEntity();
+			result.setCode(response.getStatusLine().getStatusCode());
+			if (entity != null) {
+				result.setMsg(EntityUtils.toString(entity, "UTF-8")); //解决中文乱码问题
+				if(result.getCode()!=200){
+					request.abort();
+				}
+			}
+		} catch (IOException e ) {
+			e.printStackTrace();
+		} finally {
+
+		}
+		
+		return result;
+	}
 	
 	/**
 	 * 使用缺省的一些headers发送GET请求 
