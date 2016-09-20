@@ -1,6 +1,11 @@
 package com.xjj.http;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.xjj.util.DateUtils;
+import com.xjj.util.FileAccessUtils;
 import com.xjj.util.RandomUtils;
 import com.xjj.util.RegexUtils;
 
@@ -16,7 +21,14 @@ public class GetAccessTest2 {
 	public static void main(String[] args) {
 		int times = 5;	//总次数
 		int maxIntervalMinutes = 1; //Minutes
-		String url = "http://www.maimemo.com/share/page/?uid=727782&pid=624&from=singlemessage&isappinstalled=1";
+
+		String hostFileName = "D:/httphosts.txt";
+		ArrayList<String> hosts = FileAccessUtils.readByLines(hostFileName);
+		Map<String, Integer> urlHitCount = new HashMap<>(hosts.size());
+		for(String host : hosts){
+			urlHitCount.put(host, 0);
+		}
+		String url = RandomUtils.getRandomElement(hosts);
 
 		logMsg("Program started, will hit for %s times, with maximum interval %s minutes", times, maxIntervalMinutes);
 

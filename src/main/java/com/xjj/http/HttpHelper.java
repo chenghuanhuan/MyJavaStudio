@@ -58,12 +58,12 @@ public class HttpHelper {
 			String ip = ipPrefixes[RandomUtils.getRandomInt(ipPrefixes.length)]+RandomUtils.getRandomInt(2,254);
 			request.setHeader("X-Forwarded-For", ip);
 			request.setHeader("CLIENT-IP", ip);
-			request.setHeader("HTTP-CLIENT-IP", ip);
+			/*request.setHeader("HTTP-CLIENT-IP", ip);
 			request.setHeader("X-Real-IP", ip);
 			request.setHeader("Proxy-Client-IP", ip);
 			request.setHeader("WL-Proxy-Client-IP", ip);
 			request.setHeader("HTTP_X_FORWARDED_FOR", ip);
-			request.setHeader("Cache-Control", "max-age=0");
+			request.setHeader("Cache-Control", "max-age=0");*/
 			
 			System.out.println("User-Agent: " + request.getHeaders("User-Agent")[0].getValue());
 			System.out.println("ip: " + ip);
