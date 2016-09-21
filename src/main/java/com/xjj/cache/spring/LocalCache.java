@@ -4,6 +4,7 @@ package com.xjj.cache.spring;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -105,5 +106,10 @@ public class LocalCache implements Cache {
 				}
 			}
 		}
+	}
+
+	@Override
+	public <T> T get(Object key, Callable<T> valueLoader) {
+		return null;
 	}
 }

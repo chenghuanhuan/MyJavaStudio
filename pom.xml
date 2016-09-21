@@ -10,7 +10,7 @@
 
 	
 	<properties>
-		<spring.version>4.2.0.RELEASE</spring.version>
+		<spring.version>4.3.2.RELEASE</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	<!-- 解决xml文件中文注释乱码的问题 -->
 	</properties>
   
@@ -69,7 +69,7 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.6.0</version>
-		</dependency>		
+		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.batch</groupId>
@@ -91,7 +91,7 @@
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			<version>2.7.3</version>
+			<version>2.8.1</version>
 		</dependency>
 				
 	<!-- Begin of DB related -->			
@@ -134,7 +134,7 @@
 		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
-			<version>2.4.0</version>
+			<version>2.5.0</version>
 		</dependency>
 			
 		<!-- BoneCp -->
@@ -170,34 +170,34 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>2.5</version>
+			<version>2.6.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.5</version>
+			<version>2.6.2</version>
 		</dependency>
 		<dependency> <!-- 桥接：告诉Slf4j使用Log4j2 -->
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.5</version>
+			<version>2.6.2</version>
 		</dependency>
 		<dependency> <!-- 桥接：告诉commons logging使用Log4j2 -->
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jcl</artifactId>
-			<version>2.5</version>
+			<version>2.6.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.13</version>
+			<version>1.7.21</version>
 		</dependency>
 		
 		<!-- 其他工具类 -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>18.0</version>
+			<version>19.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
