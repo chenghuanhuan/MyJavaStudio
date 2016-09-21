@@ -40,6 +40,7 @@ public class HttpHelper {
 			"219.129.99.", "223.73.60.", "116.27.32.", "125.92.119.", "123.133.53.", "113.92.146.", "180.99.62.", "183.51.159.",
 			"119.190.61.", "14.124.102.", "113.245.100."};
 	
+	
 	/**
 	 * 使用随机的头信息发送GET请求
 	 * @param url
@@ -54,8 +55,10 @@ public class HttpHelper {
 			request.setHeader("Accept", defaultHeaders.get("Accept"));
 			request.setHeader("Connection", defaultHeaders.get("Connection"));
 			request.setHeader("Accept-Language", defaultHeaders.get("Accept-Language"));
-			request.setHeader("User-Agent", userAgents[RandomUtils.getRandomInt(userAgents.length)]);
-			String ip = ipPrefixes[RandomUtils.getRandomInt(ipPrefixes.length)]+RandomUtils.getRandomInt(2,254);
+			//request.setHeader("User-Agent", userAgents[RandomUtils.getRandomInt(userAgents.length)]);
+			request.setHeader("User-Agent", RandomUtils.getRandomElement(userAgents));
+			//String ip = ipPrefixes[RandomUtils.getRandomInt(ipPrefixes.length)]+RandomUtils.getRandomInt(2,254);
+			String ip = RandomUtils.getRandomElement(ipPrefixes)+RandomUtils.getRandomInt(2,254);
 			request.setHeader("X-Forwarded-For", ip);
 			request.setHeader("CLIENT-IP", ip);
 			/*request.setHeader("HTTP-CLIENT-IP", ip);
@@ -77,7 +80,7 @@ public class HttpHelper {
 					request.abort();
 				}
 			}
-		} catch (IOException e ) {
+		} catch (Exception e ) {
 			e.printStackTrace();
 		} finally {
 
