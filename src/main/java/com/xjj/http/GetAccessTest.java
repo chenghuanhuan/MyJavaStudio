@@ -51,7 +51,7 @@ public class GetAccessTest {
 		
 		while ( System.currentTimeMillis() <= endTime) {
 			String url = RandomUtils.getRandomElement(hosts);
-			HttpResult result = HttpHelper.doGet(url);
+			HttpHelperResult result = HttpHelper.doGet(url);
 			if(result.getCode()==200){
 				succCount ++;
 				String websiteHitCount = RegexUtils.getFirstMatch(result.getMsg(), "\\d+人阅读");

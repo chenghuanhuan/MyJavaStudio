@@ -1,13 +1,12 @@
 package com.xjj.spring.properties;
 
-import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 	
-	@Test
+	//@Test
 	public void test1() {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("com/xjj/spring/properties/application.xml");
 

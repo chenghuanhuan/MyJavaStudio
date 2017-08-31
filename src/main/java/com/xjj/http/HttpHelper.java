@@ -46,8 +46,8 @@ public class HttpHelper {
 	 * @param url
 	 * @return
 	 */
-	public static HttpResult doGetWithRandoms(String url){
-		HttpResult result = new HttpResult();
+	public static HttpHelperResult doGetWithRandoms(String url){
+		HttpHelperResult result = new HttpHelperResult();
 		HttpClient client = HttpClientBuilder.create().build();
 		
 		try {
@@ -94,8 +94,8 @@ public class HttpHelper {
 	 * @param url
 	 * @return
 	 */
-	public static HttpResult doGet(String url) {
-		HttpResult result = new HttpResult();
+	public static HttpHelperResult doGet(String url) {
+		HttpHelperResult result = new HttpHelperResult();
 		HttpClient client = HttpClientBuilder.create().build();
 
 		try {
@@ -128,8 +128,8 @@ public class HttpHelper {
 	 * @param headers
 	 * @return
 	 */
-	public static HttpResult doGet(String url, Map<String, String> headers) {
-		HttpResult result = new HttpResult();
+	public static HttpHelperResult doGet(String url, Map<String, String> headers) {
+		HttpHelperResult result = new HttpHelperResult();
 		HttpClient client = HttpClientBuilder.create().build();
 		
 		try {
@@ -159,11 +159,11 @@ public class HttpHelper {
 	}
 
 	public static void main(String[] args) {
-		//HttpResult result = doGet("http://blog.csdn.net/clementad/article/details/46491701");
+		//HttpHelperResult result = doGet("http://blog.csdn.net/clementad/article/details/46491701");
 		
 		Map<String, String> defaultHeaders = new HashMap<>();
 		defaultHeaders.put("apikey", "da47545cf2bf34e59a445eda060ee62b");
-		HttpResult result = doGet("http://apis.baidu.com/apistore/stockservice/stock?stockid=sz000002", defaultHeaders);
+		HttpHelperResult result = doGet("http://apis.baidu.com/apistore/stockservice/stock?stockid=sz000002", defaultHeaders);
 		ObjectMapper jsonMapper = new ObjectMapper();
 		try {
 			@SuppressWarnings("unchecked")

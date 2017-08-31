@@ -3,15 +3,13 @@ package com.xjj.algorithm;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.junit.Test;
-
 public class MyCollections {
 
 	/**
 	 * 交集
 	 * @author XuJijun
 	 */
-	@Test
+	//@Test
 	public void intersection() {
 		Set<String> set1 = new LinkedHashSet<>();
 		Set<String> set2 = new LinkedHashSet<>();
@@ -35,7 +33,7 @@ public class MyCollections {
 	 * 并集
 	 * @author XuJijun
 	 */
-	@Test
+	//@Test
 	public void union() {
 		Set<String> set1 = new LinkedHashSet<>();
 		Set<String> set2 = new LinkedHashSet<>();

@@ -1,27 +1,25 @@
 package com.xjj.http;
 
+/**
+ * Created by XuJijun on 2017-06-06.
+ */
 public class HttpResult {
-	private int code;
-	private String msg;
-	
-	
-	public int getCode() {
-		return code;
+	private int status;
+	private String payload;
+
+	public int getStatus() {
+		return status;
 	}
-	public void setCode(int code) {
-		this.code = code;
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
-	public String getMsg() {
-		return msg;
+
+	public String getPayload() {
+		return payload;
 	}
-	public void setMsg(String msg) {
-		this.msg = msg;
+
+	public void setPayload(String payload) {
+		this.payload = payload;
 	}
-	
-	@Override
-	public String toString() {
-		return "HttpResult [code=" + code + ", msg=" + msg + "]";
-	}
-	
-	
 }
