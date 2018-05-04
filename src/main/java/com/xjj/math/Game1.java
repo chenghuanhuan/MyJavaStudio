@@ -16,11 +16,21 @@ public class Game1 {
         int gentlemanZeros = 0;
         int gentlemanGets =0;
 
+        int ladyCards[] = new int[times];
+
         for(int i=0; i<times; i++){
+            int gentlemanCard = 1;
+
+            if(i>=2 && ladyCards[i-1]==0 && ladyCards[i-2]==0){
+                gentlemanCard = 0;
+            }
+
+
             int ladyCard = Math.random()<ladyRate ? 0 : 1;
 
-            int gentlemanCard = Math.random()<gentlemanRate ? 0 : 1;
+            //int gentlemanCard = Math.random()<gentlemanRate ? 0 : 1;
             //int gentlemanCard = ladyZeros/(double)i < ladyRate ? 0 : 1;
+
 
             if(ladyCard==0){
                 ladyZeros++;
@@ -31,6 +41,8 @@ public class Game1 {
 
             //System.out.println("lady=" + ladyCard + "; gentleman=" + gentlemanCard);
             gentlemanGets += rules[ladyCard][gentlemanCard];
+
+            ladyCards[i] = ladyCard;
         }
 
         System.out.println("\n女生控制正面的几率=" + ladyRate);
@@ -45,11 +57,14 @@ public class Game1 {
         double rate3 = 0.5;
         double rate4 = 0.8;
 
-        int times = 10000;
+        int times = 100000;
 
-        for (int i=1; i<10; i++) {
-            getFromGame(times, rate0, 0.1*i);
-        }
+
+//        for (int i=1; i<100; i++) {
+//            getFromGame(times, rate0, 0.01*i);
+//        }
+
+        getFromGame(times, rate0, 0);
 
 //        getFromGame(times, rate0, 0.5);
 //        getFromGame(times, rate1, 0.5);

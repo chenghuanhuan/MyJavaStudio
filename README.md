@@ -8,14 +8,14 @@ And some customized utilities, encapsulated open-source code.
 
 ## Java and Framework:
 - Cache related:
-	- A local cache example using ConcurrentHashMap (package: com.xjj.cache.local)
-	- Guava Cache: an example for using Guava cache framework, including management web page (refer to: http://blog.csdn.net/clementad/article/details/46491701)
-	- Redis: A simple example using spring data redis
+  - A local cache example using ConcurrentHashMap (package: com.xjj.cache.local)
+  - Guava Cache: an example for using Guava cache framework, including management web page (refer to: http://blog.csdn.net/clementad/article/details/46491701)
+  - Redis: A simple example using spring data redis
 - Database related:
-	- MyBatis (resource: db.properties, spring/db.xml; com.xjj.dao, com.xjj.mapper)
-	- HikariCP connection pool (resource: spring/db.xml)
-	- MySQL access
-	- SQL Server (2000, version 8) access
+  - MyBatis (resource: db.properties, spring/db.xml; com.xjj.dao, com.xjj.mapper)
+  - HikariCP connection pool (resource: spring/db.xml)
+  - MySQL access
+  - SQL Server (2000, version 8) access
 - FreeMarker: A simple implementation of freeMarker (refer to: http://blog.csdn.net/clementad/article/details/41862155)
 - FTP: A simple FTP client with progress shown
 - HTTP Client
@@ -24,16 +24,18 @@ And some customized utilities, encapsulated open-source code.
 - Math and Format: BigDecimal, NumberFormat
 - POI/Excel example
 - Spring related:
-	- Spring Batch (com.xjj.spring.batch)
-	- SpringMVC example
+  - Spring Batch (com.xjj.spring.batch)
+  - SpringMVC example
 - Timers
 - Utilities:
-	- ClassPathUtils
-	- DateUtils
-	- FileAccessUtils
-	- RandomUtils
-	- RegexUtils
-	- StringUtils
+  - ClassPathUtils
+  - DateUtils
+  - FileAccessUtils
+  - RandomUtils
+  - RegexUtils
+  - StringUtils
+- Security:
+  - customized jwt
 
 ## Java Web:
 - Example to trigger the web browser to be in Full Screen state.
