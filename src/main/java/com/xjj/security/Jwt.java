@@ -64,8 +64,15 @@ public class Jwt {
     public static class JwtPayload{
         private int type;
         private Object id;
+        private long exp;
 
         public JwtPayload(){}
+
+        public JwtPayload(int type, Object id, long exp) {
+            this.type = type;
+            this.id = id;
+            this.exp = exp;
+        }
 
         public JwtPayload(int type, Object id) {
             this.type = type;
@@ -87,11 +94,19 @@ public class Jwt {
         public void setId(Object id) {
             this.id = id;
         }
+
+        public long getExp() {
+            return exp;
+        }
+
+        public void setExp(long exp) {
+            this.exp = exp;
+        }
     }
 
 
     public static void main(String[] args) throws Exception {
-        JwtPayload jwtPayload = new JwtPayload(1, "xu");
+        JwtPayload jwtPayload = new JwtPayload(1, "xu", System.currentTimeMillis()/1000 + 8*60*60);
 
         String jwt = generateJwt(jwtPayload);
 

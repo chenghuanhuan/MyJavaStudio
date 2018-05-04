@@ -43,7 +43,7 @@ public class AesUtils {
 		}
 
 		if(encrypt!=null) {
-			return new String(Base64.getEncoder().encode(encrypt));
+			return new String(Base64.getUrlEncoder().encode(encrypt));
 		}else {
 			return null;
 		}
@@ -58,7 +58,7 @@ public class AesUtils {
 			//Key key = generateKey(keyStr);
 			Cipher cipher = Cipher.getInstance(aseType);
 			cipher.init(Cipher.DECRYPT_MODE, key);
-			decrypt = cipher.doFinal(Base64.getDecoder().decode(encryptData));
+			decrypt = cipher.doFinal(Base64.getUrlDecoder().decode(encryptData));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
