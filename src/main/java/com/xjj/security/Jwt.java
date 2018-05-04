@@ -23,15 +23,15 @@ public class Jwt {
         //String payload = String.valueOf(type).concat(".").concat(String.valueOf(id));
         String payloadStr = objectMapper.writeValueAsString(payload);
         String aesPayload = aesUtils.encrypt(payloadStr);
-        //System.out.println(aesPayload);
+        System.out.println("aesPayload: " + aesPayload);
 
         // HMAC-SHA256 签名:
-        String hmac = hmacSha256.hmacHex(aesPayload);
+        String signature = hmacSha256.hmacHex(aesPayload);
         //System.out.println(hmac);
 
         // 拼装jwt：
-        String jwt = aesPayload.concat(".").concat(hmac);
-        System.out.println("jwt" + jwt);
+        String jwt = aesPayload.concat(".").concat(signature);
+        System.out.println("jwt: " + jwt);
 
         return jwt;
     }
@@ -44,13 +44,13 @@ public class Jwt {
         }
 
         String aesPayload = ss[0];
-        String hmac = ss[1];
+        String signature = ss[1];
 
-        if(StringUtils.isAnyBlank(aesPayload, hmac)){
+        if(StringUtils.isAnyBlank(aesPayload, signature)){
             return Optional.empty();
         }
 
-        if(!hmac.equals(hmacSha256.hmacHex(aesPayload))){ //签名不符
+        if(!signature.equals(hmacSha256.hmacHex(aesPayload))){ //签名不符
             return Optional.empty();
         }
 
