@@ -1,27 +1,29 @@
 package com.xjj.misc;
 
+import org.codehaus.jettison.json.JSONObject;
+
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
-import org.codehaus.jettison.json.JSONObject;
+import java.util.*;
 
 public class Misc {
 	public static void main(String[] args) throws MalformedURLException {
 		Misc m = new Misc();
-		m.test1();
-		m.test2();
-		m.test3();
-		m.maxInteger();
+//		m.test1();
+//		m.test2();
+//		m.test3();
+//		m.maxInteger();
+		m.plusPlusTest();
 	}
-	
-	public void test1() throws MalformedURLException {
+
+	private void plusPlusTest(){
+		int i=0, j=0;
+		int x=i++, y=++j;
+		System.out.println("i: " + i + "; x:" + x);
+		System.out.println("j: " + j + "; y:" + y);
+	}
+
+	private void test1() throws MalformedURLException {
 		final String[] URL_NAMES = { "http://javapuzzlers.com",
 				"http://apache2-snort.skybar.dreamhost.com",
 				"http://www.google.com",
@@ -37,7 +39,7 @@ public class Misc {
 		
 	}
 
-	public void test2() {
+	private void test2() {
         Random rnd = new Random();
         boolean toBe = rnd.nextBoolean();
         Number result = (toBe || !toBe) ?
@@ -45,7 +47,7 @@ public class Misc {
         System.out.println(result);
     }
 	
-	public void test3(){
+	private void test3(){
 		Map<String, Double> m = new HashMap<>();
 		m.put("aaaa", 123456.789);
 		JSONObject jsonObject = new JSONObject(m);
@@ -56,8 +58,8 @@ public class Misc {
 		List<String> l = Arrays.asList(s);
 		System.out.println(l);
 	}
-	
-	public void maxInteger() {
+
+	private void maxInteger() {
 		System.out.println(Integer.MAX_VALUE);
 	}
 }
